@@ -1,0 +1,30 @@
+<button onclick="gerarFicha()">Gerar Ficha</button>
+<pre id="ficha"></pre>
+
+<script>
+const racas = ["Humano", "Elfo", "Anão", "Halfling"];
+const classes = ["Guerreiro", "Clérigo", "Ladrão", "Mago"];
+
+function rolarAtributo() {
+  return Math.floor(Math.random() * 6 + 1) +
+         Math.floor(Math.random() * 6 + 1) +
+         Math.floor(Math.random() * 6 + 1);
+}
+
+function gerarFicha() {
+  const ficha = {
+    raca: racas[Math.floor(Math.random() * racas.length)],
+    classe: classes[Math.floor(Math.random() * classes.length)],
+    atributos: {
+      Força: rolarAtributo(),
+      Destreza: rolarAtributo(),
+      Constituição: rolarAtributo(),
+      Inteligência: rolarAtributo(),
+      Sabedoria: rolarAtributo(),
+      Carisma: rolarAtributo()
+    }
+  };
+
+  document.getElementById('ficha').textContent = JSON.stringify(ficha, null, 2);
+}
+</script>

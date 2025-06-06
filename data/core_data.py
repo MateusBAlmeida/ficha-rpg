@@ -14,3 +14,10 @@ ATRIBUTOS = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria
 def rolar_atributo_heroico():
     dados = sorted([random.randint(1, 6) for _ in range(4)], reverse=True)
     return sum(dados[:3])
+
+DADOS_DE_VIDA = {
+    "Guerreiro": 10,
+    "Clérigo": 8,
+    "Ladrão": 6,
+    "Mago": 4
+}

@@ -1,4 +1,4 @@
-from data.core_data import RACAS, CLASSES, ATRIBUTOS, rolar_atributo_heroico
+from data.core_data import DADOS_DE_VIDA, RACAS, CLASSES, ATRIBUTOS, rolar_atributo_heroico
 from models.character import FichaPersonagem
 import random
 
@@ -10,12 +10,25 @@ def gerar_ficha() -> FichaPersonagem:
     modificadores = {nome: calcular_modificador(valor) for nome, valor in atributos.items()}
     habilidades = RACAS[raca]
 
+    dado_base = DADOS_DE_VIDA.get(classe, 6)  # padrão se classe não reconhecida
+    pv = random.randint(1, dado_base) + modificadores["Constituição"]
+    ca = 10 + modificadores["Destreza"]
+
+    jp = {
+        "JPD": 5 + modificadores["Destreza"],
+        "JPC": 5 + modificadores["Constituição"],
+        "JPS": 5 + modificadores["Sabedoria"]
+    }
+
     return FichaPersonagem(
         raca=raca,
         classe=classe,
         atributos=atributos,
         modificadores=modificadores,
-        habilidades_raciais=habilidades
+        habilidades_raciais=habilidades,
+        pv = max(pv, 1),  # nunca menos que 1
+        ca=ca,
+        jp=jp
     )
 
 def calcular_modificador(valor: int) -> int:

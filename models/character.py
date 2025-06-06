@@ -7,3 +7,6 @@ class FichaPersonagem(BaseModel):
     atributos: Dict[str, int]
     modificadores: Dict[str, int]
     habilidades_raciais: list[str]
+    pv: int
+    ca: int
+    jp: Dict[str, int]

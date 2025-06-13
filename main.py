@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from services.generator import gerar_ficha
 from models.character import FichaPersonagem
+from db import Base, engine
+from routes import auth_routes, ficha_routes
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -18,3 +20,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+Base.metadata.create_all(bind=engine)
+
+app.include_router(auth_routes.router)
+app.include_router(ficha_routes.router)
